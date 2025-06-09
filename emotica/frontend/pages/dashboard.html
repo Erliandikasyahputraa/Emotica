@@ -9,29 +9,56 @@
     <link rel="stylesheet" href="../style/main.css">
 </head>
 <body class="bg-gray-100">
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-          <a href="index.html" class="text-xl font-bold">Emotica</a>
-          
-          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-          
-          <div class="nav-links" id="navLinks">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="history.html" class="nav-link">History</a>
-            <a href="about.html" class="nav-link">About</a>
-            <div id="auth-buttons">
-              <a href="login.html" class="nav-link">Login</a>
-              <a href="register.html" class="nav-link">Register</a>
+     <!-- Navigation -->
+     <nav class="bg-bg border-b-2 border-text sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-text">Emotica</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="history.html" class="nav-link">History</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <div class="flex items-center gap-4">
+                        <button class="theme-toggle p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" id="themeToggle" aria-label="Toggle theme">
+                            <svg id="sunIcon" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <svg id="moonIcon" class="w-5 h-5 hidden text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="p-2 rounded-md text-text">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobileMenu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-bg border-t-2 border-border">
+                <a href="index.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">Home</a>
+                <a href="dashboard.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">Dashboard</a>
+                <a href="history.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">History</a>
+                <a href="about.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">About</a>
+                <div class="pt-4 pb-3 border-t border-border mt-4">
+                    <div class="flex items-center justify-center space-x-4">
+                        <a href="login.html" class="block px-4 py-2 text-text hover:bg-accent/10 rounded-md font-medium">Login</a>
+                        <a href="register.html" class="px-4 py-2 bg-accent text-white font-medium rounded-md hover:bg-accent/90">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- Main Content -->
     <div class="py-10">
@@ -261,44 +288,59 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Mobile menu toggle
-          const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-          const navLinks = document.getElementById('navLinks');
-      
-          if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', () => {
-              navLinks.classList.toggle('active');
-            });
-          }
-      
-          // Update active link
-          const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-          document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-              link.classList.add('active');
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const navLinks = document.getElementById('navLinks');
+        
+            if (mobileMenuBtn && navLinks) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    navLinks.classList.toggle('active');
+                });
             }
-          });
+
+            // Update active link
+            const currentPage = window.location.pathname.split('/').pop() || 'dashboard.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+            }
+            
+            // Toggle theme
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    if (currentTheme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        if (sunIcon) sunIcon.classList.remove('hidden');
+                        if (moonIcon) moonIcon.classList.add('hidden');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        if (sunIcon) sunIcon.classList.add('hidden');
+                        if (moonIcon) moonIcon.classList.remove('hidden');
+                    }
+                });
+            }
         });
-      </script><script>
-  document.addEventListener('DOMContentLoaded', function() {
-    // Mobile menu toggle
-    const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-    const navLinks = document.getElementById('navLinks');
-
-    if (mobileMenuBtn && navLinks) {
-      mobileMenuBtn.addEventListener('click', () => {
-        navLinks.classList.toggle('active');
-      });
-    }
-
-    // Update active link
-    const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-    document.querySelectorAll('.nav-link').forEach(link => {
-      if (link.getAttribute('href') === currentPage) {
-        link.classList.add('active');
-      }
-    });
-  });
-</script>
+    </script>
 </body>
 </html>

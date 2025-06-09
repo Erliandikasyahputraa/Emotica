@@ -4,126 +4,276 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About - Emotica</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link rel="stylesheet" href="../style/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #7F1DFF 0%, #3B82F6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .nav-link {
+            color: var(--text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s ease;
+        }
+        .nav-link:hover {
+            color: var(--accent);
+        }
+        .nav-link.active {
+            color: var(--accent);
+            font-weight: 600;
+        }
+    </style>
 </head>
-<body class="bg-gray-50">
+<body class="min-h-screen bg-bg text-text">
     <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-          <a href="index.html" class="text-xl font-bold">Emotica</a>
-          
-          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-          
-          <div class="nav-links" id="navLinks">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="history.html" class="nav-link">History</a>
-            <a href="about.html" class="nav-link">About</a>
-            <div id="auth-buttons">
-              <a href="login.html" class="nav-link">Login</a>
-              <a href="register.html" class="nav-link">Register</a>
+    <nav class="bg-bg border-b-2 border-text sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-text flex items-center">
+                        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 mr-2">
+                            <rect x="4" y="8" width="40" height="28" rx="14" class="fill-accent"/>
+                            <ellipse cx="24" cy="22" rx="16" ry="12" class="fill-bg"/>
+                            <ellipse cx="18" cy="22" rx="2.5" ry="2.5" class="fill-accent"/>
+                            <ellipse cx="30" cy="22" rx="2.5" ry="2.5" class="fill-accent"/>
+                            <path d="M18 27c2.5 2 7.5 2 10 0" stroke="var(--accent)" stroke-width="2" stroke-linecap="round"/>
+                        </svg>
+                        Emotica
+                    </a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="history.html" class="nav-link">History</a>
+                    <a href="about.html" class="nav-link active">About</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <button class="theme-toggle p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" id="themeToggle" aria-label="Toggle theme">
+                        <svg id="sunIcon" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                        </svg>
+                        <svg id="moonIcon" class="w-5 h-5 hidden text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                        </svg>
+                    </button>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="p-2 rounded-md text-text">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
+        <!-- Mobile menu -->
+        <div id="mobileMenu" class="md:hidden hidden bg-bg border-t-2 border-text">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+                <a href="index.html" class="block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="dashboard.html" class="block px-3 py-2 rounded-md text-base font-medium">Dashboard</a>
+                <a href="history.html" class="block px-3 py-2 rounded-md text-base font-medium">History</a>
+                <a href="about.html" class="block px-3 py-2 rounded-md text-base font-medium bg-gray-100 dark:bg-gray-700">About</a>
+                <a href="login.html" class="block px-3 py-2 rounded-md text-base font-medium">Login</a>
+                <a href="register.html" class="block px-3 py-2 rounded-md text-base font-medium">Sign Up</a>
+            </div>
+        </div>
+    </nav>
 
     <!-- Main Content -->
-    <div class="py-10">
-        <header>
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <h1 class="text-3xl font-bold text-gray-900">About Emotica</h1>
-                <p class="mt-2 text-sm text-gray-600">
-                    Learn more about Emotica and how it works.
-                </p>
-            </div>
-        </header>
-        <main>
-            <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <!-- About -->
-                <div class="mt-8">
-                    <div class="bg-white shadow overflow-hidden sm:rounded-lg">
-                        <div class="px-4 py-5 sm:px-6">
-                            <h2 class="text-lg leading-6 font-medium text-gray-900">
-                                About Emotica
-                            </h2>
-                            <p class="mt-1 max-w-2xl text-sm text-gray-500">
-                                A sentiment analysis tool that helps you understand the sentiment of your text.
-                            </p>
+    <div class="min-h-screen flex flex-col items-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="w-full max-w-6xl space-y-12">
+            <!-- Hero Section -->
+            <div class="bg-bg border-2 border-text p-8 rounded-lg shadow-lg">
+                <h1 class="text-4xl font-bold mb-6 text-center">Tentang <span class="gradient-text">Emotica</span></h1>
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold mb-4">Visi Kami</h2>
+                    <p class="text-text/80 leading-relaxed">
+                        Emotica bertujuan untuk menciptakan lingkungan digital yang lebih positif dan empatik melalui analisis sentimen teks yang cerdas. Kami percaya bahwa komunikasi yang lebih baik dapat membangun hubungan yang lebih bermakna di dunia digital.
+                    </p>
+                </div>
+                
+                <div class="mb-8">
+                    <h2 class="text-2xl font-semibold mb-4">Teknologi</h2>
+                    <p class="text-text/80 mb-4">
+                        Dibangun dengan teknologi modern seperti:
+                    </p>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="p-4 border-2 border-text rounded-lg text-center hover:shadow-md transition-shadow">
+                            <i class="fab fa-html5 text-4xl text-accent mb-2"></i>
+                            <h3 class="font-semibold">HTML5</h3>
                         </div>
-                        <div class="border-t border-gray-200 px-4 py-5 sm:px-6">
-                            <dl class="grid grid-cols-1 gap-x-4 gap-y-8 sm:grid-cols-2">
-                                <div class="sm:col-span-1">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        What is Emotica?
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                        Emotica is a sentiment analysis tool that helps you understand the sentiment of your text.
-                                    </dd>
-                                </div>
-                                <div class="sm:col-span-1">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        How does it work?
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                        Emotica uses natural language processing to analyze the sentiment of your text.
-                                    </dd>
-                                </div>
-                                <div class="sm:col-span-2">
-                                    <dt class="text-sm font-medium text-gray-500">
-                                        Features
-                                    </dt>
-                                    <dd class="mt-1 text-sm text-gray-900">
-                                        <ul class="list-disc pl-5">
-                                            <li>Sentiment analysis</li>
-                                            <li>Text analysis</li>
-                                            <li>History of analyses</li>
-                                            <li>Export functionality</li>
-                                        </ul>
-                                    </dd>
-                                </div>
-                            </dl>
+                        <div class="p-4 border-2 border-text rounded-lg text-center hover:shadow-md transition-shadow">
+                            <i class="fab fa-css3-alt text-4xl text-accent mb-2"></i>
+                            <h3 class="font-semibold">CSS3</h3>
+                        </div>
+                        <div class="p-4 border-2 border-text rounded-lg text-center hover:shadow-md transition-shadow">
+                            <i class="fab fa-js text-4xl text-accent mb-2"></i>
+                            <h3 class="font-semibold">JavaScript</h3>
+                        </div>
+                        <div class="p-4 border-2 border-text rounded-lg text-center hover:shadow-md transition-shadow">
+                            <i class="fab fa-python text-4xl text-accent mb-2"></i>
+                            <h3 class="font-semibold">Python</h3>
                         </div>
                     </div>
                 </div>
             </div>
-        </main>
+
+            <!-- Team Section -->
+            <div class="bg-bg border-2 border-text p-8 rounded-lg shadow-lg">
+                <h2 class="text-3xl font-bold mb-8 text-center">Tim <span class="gradient-text">Kami</span></h2>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <!-- Team Member 1 -->
+                    <div class="p-6 border-2 border-text rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-accent flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Bivandira Aurel Maha Dewa</h3>
+                        <p class="text-text/70 mb-3">Machine Learning Engineer</p>
+                        <p class="text-sm text-text/60 mb-3">MC220D5Y0520</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 2 -->
+                    <div class="p-6 border-2 border-text rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-accent flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Mahendra Kirana M.B</h3>
+                        <p class="text-text/70 mb-3">Machine Learning Engineer</p>
+                        <p class="text-sm text-text/60 mb-3">MC208D5Y1158</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 3 -->
+                    <div class="p-6 border-2 border-text rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-accent flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Addien Munadiya Yunadi</h3>
+                        <p class="text-text/70 mb-3">Machine Learning Engineer</p>
+                        <p class="text-sm text-text/60 mb-3">MC299D5Y1926</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 4 -->
+                    <div class="p-6 border-2 border-text rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-accent flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Erliandika Syahputra</h3>
+                        <p class="text-text/70 mb-3">Front-End Developer</p>
+                        <p class="text-sm text-text/60 mb-3">FC220D5Y0389</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                    <!-- Team Member 5 -->
+                    <div class="p-6 border-2 border-text rounded-lg text-center hover:shadow-lg transition-shadow">
+                        <div class="w-24 h-24 mx-auto mb-4 rounded-full bg-accent flex items-center justify-center">
+                            <i class="fas fa-user text-3xl text-white"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Fajri Nurhadi</h3>
+                        <p class="text-text/70 mb-3">Back-End Developer</p>
+                        <p class="text-sm text-text/60 mb-3">FC220D5Y2226</p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-github"></i></a>
+                            <a href="#" class="text-text hover:text-accent transition-colors"><i class="fab fa-linkedin"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-200">
+    <footer class="bg-bg border-t-2 border-text">
         <div class="max-w-7xl mx-auto py-6 px-4 sm:px-6 lg:px-8">
-            <p class="text-center text-sm text-gray-500">
+            <p class="text-center text-sm text-text/70">
                 &copy; 2023 Emotica. All rights reserved.
             </p>
         </div>
     </footer>
 
-    <script src="../js/about.js" type="module"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Mobile menu toggle
-          const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-          const navLinks = document.getElementById('navLinks');
-      
-          if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', () => {
-              navLinks.classList.toggle('active');
-            });
-          }
-      
-          // Update active link
-          const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-          document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-              link.classList.add('active');
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', () => {
+                    mobileMenu.classList.add('hidden');
+                });
+
+                // Prevent clicks inside the menu from closing it
+                mobileMenu.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                });
             }
-          });
+
+
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+            }
+            
+            // Toggle theme
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    if (currentTheme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        if (sunIcon) sunIcon.classList.remove('hidden');
+                        if (moonIcon) moonIcon.classList.add('hidden');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        if (sunIcon) sunIcon.classList.add('hidden');
+                        if (moonIcon) moonIcon.classList.remove('hidden');
+                    }
+                });
+            }
         });
-      </script>
-</body>
-</html>
+    </script>
+    </body>
+    </html>
+    

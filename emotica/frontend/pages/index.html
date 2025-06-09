@@ -3,56 +3,94 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emotica - Text Sentiment Analysis</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <title>Emotica - Sentiment Analysis Tool</title>
     <link rel="stylesheet" href="../style/main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .theme-text { color: var(--text); }
+        .theme-bg { background-color: var(--bg); }
+        .theme-card { background-color: var(--card-bg); }
+        .theme-border { border-color: var(--border); }
+        .theme-muted { color: var(--muted); }
+        .theme-accent { background-color: var(--accent); color: white; }
+        .theme-accent-text { color: var(--accent); }
+        .theme-border-accent { border-color: var(--accent); }
+    </style>
 </head>
-<body class="bg-gray-50">
-    <nav>
-        <div class="nav-container">
-          <a href="index.html" class="text-xl font-bold">Emotica</a>
-          
-          <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle menu">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M4 6h16M4 12h16M4 18h16"></path>
-            </svg>
-          </button>
-          
-          <div class="nav-links" id="navLinks">
-            <a href="index.html" class="nav-link">Home</a>
-            <a href="dashboard.html" class="nav-link">Dashboard</a>
-            <a href="history.html" class="nav-link">History</a>
-            <a href="about.html" class="nav-link">About</a>
-            <div id="auth-buttons">
-              <a href="login.html" class="nav-link">Login</a>
-              <a href="register.html" class="nav-link">Register</a>
+<body class="theme-bg min-h-screen">
+    <!-- Navigation -->
+    <nav class="bg-bg border-b-2 border-text sticky top-0 z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="index.html" class="text-xl font-bold text-text">Emotica</a>
+                </div>
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="nav-link">Home</a>
+                    <a href="dashboard.html" class="nav-link">Dashboard</a>
+                    <a href="history.html" class="nav-link">History</a>
+                    <a href="about.html" class="nav-link">About</a>
+                    <a href="login.html" class="nav-link">Login</a>
+                    <a href="register.html" class="nav-link">Sign Up</a>
+                    <div class="flex items-center gap-4">
+                        <button class="theme-toggle p-2 rounded-full hover:bg-gray-100 dark:hover:bg-gray-700" id="themeToggle" aria-label="Toggle theme">
+                            <svg id="sunIcon" class="w-5 h-5 text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            <svg id="moonIcon" class="w-5 h-5 hidden text-gray-700 dark:text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="md:hidden flex items-center">
+                    <button id="mobileMenuBtn" class="p-2 rounded-md text-text">
+                        <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
             </div>
-          </div>
         </div>
-      </nav>
+        <!-- Mobile menu -->
+        <div class="md:hidden hidden" id="mobileMenu">
+            <div class="px-2 pt-2 pb-3 space-y-1 bg-bg border-t-2 border-border">
+                <a href="index.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">Home</a>
+                <a href="dashboard.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">Dashboard</a>
+                <a href="history.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">History</a>
+                <a href="about.html" class="block px-3 py-2 text-text hover:bg-accent/10 rounded-md">About</a>
+                <div class="pt-4 pb-3 border-t border-border mt-4">
+                    <div class="flex items-center justify-center space-x-4">
+                        <a href="login.html" class="block px-4 py-2 text-text hover:bg-accent/10 rounded-md font-medium">Login</a>
+                        <a href="register.html" class="px-4 py-2 bg-accent text-white font-medium rounded-md hover:bg-accent/90">Sign Up</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
 
     <!-- Hero Section -->
-    <div class="relative bg-indigo-600 overflow-hidden">
+    <div class="relative overflow-hidden theme-bg">
         <div class="max-w-7xl mx-auto">
-            <div class="relative z-10 pb-8 bg-indigo-600 sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
+            <div class="relative z-10 pb-8 theme-bg sm:pb-16 md:pb-20 lg:max-w-2xl lg:w-full lg:pb-28 xl:pb-32">
                 <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
                     <div class="sm:text-center lg:text-left">
-                        <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
-                            <span class="block">Understand the emotions</span>
-                            <span class="block text-indigo-200">behind the text</span>
+                        <h1 class="text-4xl tracking-tight font-extrabold theme-text sm:text-5xl md:text-6xl">
+                            <span class="block">Understand the emotion</span>
+                            <span class="block theme-accent-text">behind the text</span>
                         </h1>
-                        <p class="mt-3 text-base text-indigo-100 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
-                            Emotica helps you analyze the sentiment of any text, giving you insights into the emotions and opinions expressed in your content.
+                        <p class="mt-3 text-base theme-muted sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Get instant sentiment analysis for any text with our powerful AI. Understand the emotional tone and context behind words.
                         </p>
                         <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
                             <div class="rounded-md shadow">
-                                <a href="dashboard.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-gray-50 md:py-4 md:text-lg md:px-10">
-                                    Try it now
+                                <a href="dashboard.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white theme-accent md:py-4 md:text-lg md:px-10">
+                                    Get Started
                                 </a>
                             </div>
-                            <div class="mt-3 sm:mt-0 sm:ml-3">
-                                <a href="#how-it-works" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-indigo-200 bg-indigo-700 hover:bg-indigo-800 md:py-4 md:text-lg md:px-10">
-                                    Learn more
+                            <div class="mt-3 rounded-md shadow sm:mt-0 sm:ml-3">
+                                <a href="about.html" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md theme-text theme-border border-2 md:py-4 md:text-lg md:px-10">
+                                    Learn More
                                 </a>
                             </div>
                         </div>
@@ -60,17 +98,14 @@
                 </main>
             </div>
         </div>
-        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
-            <img class="h-56 w-full object-cover sm:h-72 md:h-96 lg:w-full lg:h-full" src="../assets/hero-image.jpg" alt="Text analysis illustration">
-        </div>
     </div>
 
     <!-- How it Works Section -->
-    <div id="how-it-works" class="py-12 bg-white">
+    <div id="how-it-works" class="py-12 theme-bg">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="lg:text-center">
-                <h2 class="text-base text-indigo-600 font-semibold tracking-wide uppercase">How it works</h2>
-                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
+                <h2 class="text-base theme-accent-text font-semibold tracking-wide uppercase">How it works</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight theme-text sm:text-4xl">
                     Analyze text in three simple steps
                 </p>
             </div>
@@ -78,32 +113,72 @@
             <div class="mt-10">
                 <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-3 md:gap-x-8 md:gap-y-10">
                     <div class="relative">
-                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md theme-accent text-white">
                             1
                         </div>
-                        <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Enter your text</p>
-                        <p class="mt-2 ml-16 text-base text-gray-500">
+                        <p class="ml-16 text-lg leading-6 font-medium theme-text">Enter your text</p>
+                        <p class="mt-2 ml-16 text-base theme-muted">
                             Copy and paste any text you want to analyze into our simple interface.
                         </p>
                     </div>
 
                     <div class="relative">
-                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md theme-accent text-white">
                             2
                         </div>
-                        <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Let us analyze</p>
-                        <p class="mt-2 ml-16 text-base text-gray-500">
-                            Our advanced algorithms process the text to detect sentiment and emotions.
+                        <p class="ml-16 text-lg leading-6 font-medium theme-text">Get instant analysis</p>
+                        <p class="mt-2 ml-16 text-base theme-muted">
+                            Our AI analyzes the sentiment and emotions in your text in real-time.
                         </p>
                     </div>
 
                     <div class="relative">
-                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-indigo-500 text-white">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md theme-accent text-white">
                             3
                         </div>
-                        <p class="ml-16 text-lg leading-6 font-medium text-gray-900">Get insights</p>
-                        <p class="mt-2 ml-16 text-base text-gray-500">
-                            View detailed analysis and gain valuable insights from your text.
+                        <p class="ml-16 text-lg leading-6 font-medium theme-text">View results</p>
+                        <p class="mt-2 ml-16 text-base theme-muted">
+                            See detailed insights and visualizations about the sentiment of your text.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-12 theme-bg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base theme-accent-text font-semibold tracking-wide uppercase">Features</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight theme-text sm:text-4xl">
+                    Everything you need to understand sentiment
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <div class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                    <div class="relative theme-card p-6 rounded-lg border theme-border">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md theme-accent text-white">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                            </svg>
+                        </div>
+                        <p class="ml-16 text-lg leading-6 font-medium theme-text">Real-time Analysis</p>
+                        <p class="mt-2 ml-16 text-base theme-muted">
+                            Get instant feedback on the sentiment of your text as you type.
+                        </p>
+                    </div>
+
+                    <div class="relative theme-card p-6 rounded-lg border theme-border">
+                        <div class="absolute flex items-center justify-center h-12 w-12 rounded-md theme-accent text-white">
+                            <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+                            </svg>
+                        </div>
+                        <p class="ml-16 text-lg leading-6 font-medium theme-text">Detailed Analytics</p>
+                        <p class="mt-2 ml-16 text-base theme-muted">
+                            View comprehensive insights and metrics about your text's sentiment.
                         </p>
                     </div>
                 </div>
@@ -112,101 +187,113 @@
     </div>
 
     <!-- CTA Section -->
-    <div class="bg-indigo-700">
-        <div class="max-w-2xl mx-auto text-center py-16 px-4 sm:py-20 sm:px-6 lg:px-8">
-            <h2 class="text-3xl font-extrabold text-white sm:text-4xl">
-                <span class="block">Ready to analyze your text?</span>
+    <div class="theme-bg">
+        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:py-16 lg:px-8 lg:flex lg:items-center lg:justify-between">
+            <h2 class="text-3xl font-extrabold tracking-tight theme-text sm:text-4xl">
+                <span class="block">Ready to dive in?</span>
+                <span class="block theme-accent-text">Start your free trial today.</span>
             </h2>
-            <p class="mt-4 text-lg leading-6 text-indigo-200">
-                Start gaining insights from your text in seconds. No credit card required.
-            </p>
-            <a href="dashboard.html" class="mt-8 w-full inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-indigo-600 bg-white hover:bg-indigo-50 sm:w-auto">
-                Get Started
-            </a>
+            <div class="mt-8 flex lg:mt-0 lg:flex-shrink-0">
+                <div class="inline-flex rounded-md shadow">
+                    <a href="register.html" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md text-white theme-accent">
+                        Get started
+                    </a>
+                </div>
+                <div class="ml-3 inline-flex rounded-md shadow">
+                    <a href="about.html" class="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base font-medium rounded-md theme-text theme-border border-2">
+                        Learn more
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-gray-800">
-        <div class="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-            <div class="xl:grid xl:grid-cols-3 xl:gap-8">
-                <div class="space-y-8 xl:col-span-1">
-                    <span class="text-white text-2xl font-bold">Emotica</span>
-                    <p class="text-gray-300 text-base">
-                        Understanding the emotions behind your text with advanced sentiment analysis.
-                    </p>
+    <footer class="theme-bg border-t theme-border">
+        <div class="max-w-7xl mx-auto py-12 px-4 overflow-hidden sm:px-6 lg:px-8">
+            <nav class="-mx-5 -my-2 flex flex-wrap justify-center" aria-label="Footer">
+                <div class="px-5 py-2">
+                    <a href="about.html" class="text-base theme-text hover:theme-muted">About</a>
                 </div>
-                <div class="mt-12 grid grid-cols-2 gap-8 xl:mt-0 xl:col-span-2">
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Solutions</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Marketing</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Customer Support</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Product</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Research</a></li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Company</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li><a href="about.html" class="text-base text-gray-400 hover:text-white">About</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Blog</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Careers</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Contact</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                    <div class="md:grid md:grid-cols-2 md:gap-8">
-                        <div>
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Support</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Help Center</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Documentation</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">API Status</a></li>
-                            </ul>
-                        </div>
-                        <div class="mt-12 md:mt-0">
-                            <h3 class="text-sm font-semibold text-gray-300 tracking-wider uppercase">Legal</h3>
-                            <ul class="mt-4 space-y-4">
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Privacy</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Terms</a></li>
-                                <li><a href="#" class="text-base text-gray-400 hover:text-white">Cookie Policy</a></li>
-                            </ul>
-                        </div>
-                    </div>
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base theme-text hover:theme-muted">Blog</a>
                 </div>
-            </div>
-            <div class="mt-12 border-t border-gray-700 pt-8">
-                <p class="text-base text-gray-400 text-center">
-                    &copy; 2023 Emotica. All rights reserved.
-                </p>
-            </div>
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base theme-text hover:theme-muted">Privacy</a>
+                </div>
+                <div class="px-5 py-2">
+                    <a href="#" class="text-base theme-text hover:theme-muted">Terms</a>
+                </div>
+            </nav>
+            <p class="mt-8 text-center text-base theme-muted">
+                &copy; 2023 Emotica. All rights reserved.
+            </p>
         </div>
     </footer>
 
-    <script src="../js/main.js" type="module"></script>
-
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Mobile menu toggle
-          const mobileMenuBtn = document.getElementById('mobileMenuBtn');
-          const navLinks = document.getElementById('navLinks');
-      
-          if (mobileMenuBtn && navLinks) {
-            mobileMenuBtn.addEventListener('click', () => {
-              navLinks.classList.toggle('active');
-            });
-          }
-      
-          // Update active link
-          const currentPage = window.location.pathname.split('/').pop() || 'index.html';
-          document.querySelectorAll('.nav-link').forEach(link => {
-            if (link.getAttribute('href') === currentPage) {
-              link.classList.add('active');
+            // Mobile menu toggle
+            const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            if (mobileMenuBtn && mobileMenu) {
+                mobileMenuBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+
+                // Close mobile menu when clicking outside
+                document.addEventListener('click', (e) => {
+                    if (!mobileMenuBtn.contains(e.target) && !mobileMenu.contains(e.target)) {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
             }
-          });
+
+
+            // Update active link
+            const currentPage = window.location.pathname.split('/').pop() || 'index.html';
+            document.querySelectorAll('.nav-link').forEach(link => {
+                if (link.getAttribute('href') === currentPage) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Theme toggle
+            const themeToggle = document.getElementById('themeToggle');
+            const sunIcon = document.getElementById('sunIcon');
+            const moonIcon = document.getElementById('moonIcon');
+            
+            // Check for saved theme preference
+            const currentTheme = localStorage.getItem('theme') || 'light';
+            if (currentTheme === 'dark') {
+                document.documentElement.setAttribute('data-theme', 'dark');
+                if (sunIcon) sunIcon.classList.add('hidden');
+                if (moonIcon) moonIcon.classList.remove('hidden');
+            } else {
+                document.documentElement.setAttribute('data-theme', 'light');
+                if (sunIcon) sunIcon.classList.remove('hidden');
+                if (moonIcon) moonIcon.classList.add('hidden');
+            }
+            
+            // Toggle theme
+            if (themeToggle) {
+                themeToggle.addEventListener('click', () => {
+                    const currentTheme = document.documentElement.getAttribute('data-theme');
+                    if (currentTheme === 'dark') {
+                        document.documentElement.setAttribute('data-theme', 'light');
+                        localStorage.setItem('theme', 'light');
+                        if (sunIcon) sunIcon.classList.remove('hidden');
+                        if (moonIcon) moonIcon.classList.add('hidden');
+                    } else {
+                        document.documentElement.setAttribute('data-theme', 'dark');
+                        localStorage.setItem('theme', 'dark');
+                        if (sunIcon) sunIcon.classList.add('hidden');
+                        if (moonIcon) moonIcon.classList.remove('hidden');
+                    }
+                });
+            }
         });
-      </script>
+    </script>
 </body>
 </html>
